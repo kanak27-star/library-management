@@ -16,7 +16,8 @@ const DeleteBorrower = ({ onBorrowerDeleted }) => {
   // Search borrowers
   const handleSearch = async (query) => {
     try {
-      const response = await fetch(`${apiUrl}/borrowers/searchdel?query=${query}`);
+      const response = await fetch(`${apiUrl}/api/borrowers
+/searchdel?query=${query}`);
       const data = await response.json();
       setBorrowers(data);
     } catch (error) {
@@ -46,7 +47,8 @@ const DeleteBorrower = ({ onBorrowerDeleted }) => {
   const handleDelete = async () => {
     if (confirmDelete === 'delete' && selectedBorrower) {
       try {
-        const response = await fetch(`${apiUrl}/borrowers/${selectedBorrower._id}`, {
+        const response = await fetch(`${apiUrl}/api/borrowers
+/${selectedBorrower._id}`, {
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',

@@ -35,7 +35,8 @@ const Charts = () => {
 
   const fetchAnnualData = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/counts/annual');
+      const response = await fetch('http://localhost:3000/api/api/counts
+/annual');
       const data = await response.json();
       // Fill in missing years from 2020 to 2025 with 0
       const annualCounts = {};
@@ -59,7 +60,8 @@ const Charts = () => {
 
   const fetchMonthlyData = async (year) => {
     try {
-      const response = await fetch(`http://localhost:3000/api/counts/monthly/${year}`);
+      const response = await fetch(`http://localhost:3000/api/api/counts
+/monthly/${year}`);
       const data = await response.json();
       // Fill in missing months with 0
       const monthlyCounts = Array(12).fill(0);

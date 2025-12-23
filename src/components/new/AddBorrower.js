@@ -30,7 +30,8 @@ const AddBorrower = ({ onBorrowerAdded }) => {
     try {
       const apiUrl = API_URL; // Vite environment variable
 
-      const response = await fetch(`${apiUrl}/borrowers`, {
+      const response = await fetch(`${apiUrl}/api/borrowers
+`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

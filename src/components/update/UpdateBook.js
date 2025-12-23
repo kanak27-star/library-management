@@ -20,7 +20,8 @@ const UpdateBook = () => {
 
   const handleSearch = async (query) => {
     try {
-      const response = await fetch(`${API_URL}/books/search?query=${query}`);
+      const response = await fetch(`${API_URL}/api/books
+/search?query=${query}`);
       const data = await response.json();
       setBooks(data);
     } catch (error) {
@@ -71,7 +72,8 @@ const UpdateBook = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_URL}/books`, {
+      const response = await fetch(`${API_URL}/api/books
+`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

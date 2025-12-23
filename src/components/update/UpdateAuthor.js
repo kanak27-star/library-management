@@ -18,7 +18,8 @@ const UpdateAuthor = () => {
   const handleSearch = async (query) => {
     try {
         // console.log('Query:', query);
-        const response = await fetch(`${API_URL}/authors/search?query=${query}`);
+        const response = await fetch(`${API_URL}/api/authors
+/search?query=${query}`);
         const data = await response.json();
         setAuthors(data);
     } 
@@ -56,7 +57,8 @@ const UpdateAuthor = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_URL}/authors/${selectedAuthor._id}`, {
+      const response = await fetch(`${API_URL}/api/authors
+/${selectedAuthor._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

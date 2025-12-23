@@ -20,7 +20,8 @@ const CheckinBook = () => {
   const handleSearch = async (query) => {
     try {
       const response = await fetch(
-        `${API_URL}/books/searchin?query=${query}`
+        `${API_URL}/api/books
+/searchin?query=${query}`
       );
       const data = await response.json();
       // console.log(data);
@@ -78,7 +79,8 @@ const CheckinBook = () => {
 
       try {
         const response = await fetch(
-          `${API_URL}/books/checkin`,
+          `${API_URL}/api/books
+/checkin`,
           {
             method: "PUT",
             headers: {

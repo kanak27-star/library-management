@@ -48,7 +48,8 @@ const ShowAuthors = () => {
 
   const handleSearch = useCallback(async (query) => {
     try {
-      const response = await fetch(`${API_URL}/authors/search?query=${query}`);
+      const response = await fetch(`${API_URL}/api/authors
+/search?query=${query}`);
       const data = await response.json();
       startTransition(() => {
         setAuthors(data);

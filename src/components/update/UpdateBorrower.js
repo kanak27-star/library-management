@@ -18,7 +18,8 @@ const UpdateBorrower = () => {
 
   const handleSearch = async (query) => {
     try {
-      const response = await fetch(`${API_URL}/borrowers/search?query=${query}`);
+      const response = await fetch(`${API_URL}/api/borrowers
+/search?query=${query}`);
       const data = await response.json();
       setBorrowers(data);
     } catch (error) {
@@ -58,7 +59,8 @@ const UpdateBorrower = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${API_URL}/borrowers/${selectedBorrower._id}`, {
+      const response = await fetch(`${API_URL}/api/borrowers
+/${selectedBorrower._id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

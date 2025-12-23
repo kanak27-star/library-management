@@ -40,7 +40,8 @@ const AddAuthor = ({ onAuthorAdded }) => {
     try {
       const apiUrl = API_URL; // Vite environment variable
 
-      const response = await fetch(`${apiUrl}/authors`, {
+      const response = await fetch(`${apiUrl}/api/api/authors
+`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

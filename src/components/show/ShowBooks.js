@@ -85,15 +85,18 @@ const ShowBooks = ({ type }) => {
         let response = null;
         if (type === "all") {
           response = await fetch(
-            `${API_URL}/books/search?query=${query}`
+            `${API_URL}/api/books
+/search?query=${query}`
           );
         } else if (type === "borrowed") {
           response = await fetch(
-            `${API_URL}/books/searchin?query=${query}`
+            `${API_URL}/api/books
+/searchin?query=${query}`
           );
         } else if (type === "available") {
           response = await fetch(
-            `${API_URL}/books/searchout?query=${query}`
+            `${API_URL}/api/books
+/searchout?query=${query}`
           );
         }
 

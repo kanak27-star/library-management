@@ -22,7 +22,8 @@ const BookCheckout = () => {
 
   const handleBookSearch = async (query) => {
     try {
-      const response = await fetch(`${API_URL}/books/searchout?query=${query}`);
+      const response = await fetch(`${API_URL}/api/books
+/searchout?query=${query}`);
       const data = await response.json();
       setBooks(data);
     } catch (error) {
@@ -33,7 +34,8 @@ const BookCheckout = () => {
 
   const handleBorrowerSearch = async (query) => {
     try {
-      const response = await fetch(`${API_URL}/borrowers/search?query=${query}`);
+      const response = await fetch(`${API_URL}/api/borrowers
+/search?query=${query}`);
       const data = await response.json();
       setBorrowers(data);
     } catch (error) {
@@ -88,7 +90,8 @@ const BookCheckout = () => {
       const bookId = searchedBook._id;
       const borrowerId = searchedBorrower._id;
 
-      fetch(`${API_URL}/books/checkout`, {
+      fetch(`${API_URL}/api/books
+/checkout`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

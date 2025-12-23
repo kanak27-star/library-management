@@ -33,7 +33,8 @@ const AddBook = ({ onBookAdded }) => {
       // Use Vite environment variable for backend URL
       const apiUrl = API_URL;
 
-      const response = await fetch(`${apiUrl}/books`, {
+      const response = await fetch(`${apiUrl}/api/api/books
+`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
