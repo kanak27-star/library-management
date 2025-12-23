@@ -21,8 +21,12 @@ const Home = ({
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        const apiUrl = import.meta.env.VITE_API_URL; // Vite env variable
-        if (!apiUrl) throw new Error("VITE_API_URL is undefined. Check your .env");
+        // Use Vite environment variable
+        const apiUrl = import.meta.env.VITE_API_URL;
+        if (!apiUrl) {
+          console.error("VITE_API_URL is undefined. Check your .env file.");
+          return;
+        }
 
         console.log("Fetching counts from:", `${apiUrl}/counts`);
         const response = await fetch(`${apiUrl}/counts`);
@@ -74,12 +78,8 @@ const Home = ({
         <h1 className="font-bold text-center mb-6">
           Welcome to the Library Management System
         </h1>
-        <p className="text-center">
-          This is a simple library management system where
-        </p>
-        <p className="text-center">
-          you can add, update, and delete books and borrowers.
-        </p>
+        <p className="text-center">This is a simple library management system where</p>
+        <p className="text-center">you can add, update, and delete books and borrowers.</p>
         <h2 className="font-bold text-center mt-8">-:Status:-</h2>
       </Card>
 
