@@ -11,7 +11,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import  API_URL from './config'; // import API_URL from config.js
+import  API_URL from '../config'; // import API_URL from config.js
 
 ChartJS.register(
   CategoryScale,
