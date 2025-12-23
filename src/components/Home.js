@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 
 const Home = ({
   showBooks,
@@ -15,63 +15,58 @@ const Home = ({
     booksWithBorrower: 0,
     borrowersWithoutBook: 0,
   });
+
   const [forceUpdate, setForceUpdate] = useState(false);
 
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        console.log('Fetching counts...');
-        const apiUrl = import.meta.env.VITE_API_URL; // Use Vite env variable
+        const apiUrl = import.meta.env.VITE_API_URL; // Vite env variable
+        if (!apiUrl) throw new Error("VITE_API_URL is undefined. Check your .env");
+
+        console.log("Fetching counts from:", `${apiUrl}/counts`);
         const response = await fetch(`${apiUrl}/counts`);
 
-        if (response.ok) {
-          const data = await response.json();
-          console.log('Counts fetched successfully:', data);
-
-          const parsedData = {
-            books: parseInt(data.books) || 0,
-            authors: parseInt(data.authors) || 0,
-            borrowers: parseInt(data.borrowers) || 0,
-            booksWithBorrower: parseInt(data.booksWithBorrower) || 0,
-            borrowersWithoutBook: parseInt(data.borrowersWithoutBook) || 0,
-          };
-          setCounts(parsedData);
-        } else {
-          console.error('Failed to fetch counts:', response.statusText);
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
+
+        const data = await response.json();
+        console.log("Counts fetched successfully:", data);
+
+        setCounts({
+          books: parseInt(data.books) || 0,
+          authors: parseInt(data.authors) || 0,
+          borrowers: parseInt(data.borrowers) || 0,
+          booksWithBorrower: parseInt(data.booksWithBorrower) || 0,
+          borrowersWithoutBook: parseInt(data.borrowersWithoutBook) || 0,
+        });
       } catch (error) {
-        console.error('Error fetching counts:', error);
+        console.error("Error fetching counts:", error);
       }
     };
 
     fetchCounts();
   }, [forceUpdate]);
 
-  const triggerUpdate = () => {
-    console.log('Refresh button clicked');
-    setForceUpdate((prev) => !prev);
-  };
+  const triggerUpdate = () => setForceUpdate((prev) => !prev);
 
-  const Card = ({ children }) => {
-    return (
-      <div className="bg-gray-900 rounded-lg justify-center shadow-md px-4 py-4 mb-1 max-w-xl">
-        {children}
-      </div>
-    );
-  };
+  const Card = ({ children }) => (
+    <div className="bg-gray-900 rounded-lg justify-center shadow-md px-4 py-4 mb-1 max-w-xl">
+      {children}
+    </div>
+  );
 
-  const StatCard = ({ title, count, onClickHandle }) => {
-    return (
-      <div
-        className="bg-gray-800 rounded-lg shadow-md px-4 py-2 mb-2 cursor-pointer focus:scale-95 focus:ring-3 focus:ring-blue-400 hover:scale-105 transition-transform transition-ring transition-duration-100"
-        onClick={onClickHandle}
-        tabIndex={0}
-      >
-        <p className="font-semibold">{title}:</p>
-        <p>{count}</p>
-      </div>
-    );
-  };
+  const StatCard = ({ title, count, onClickHandle }) => (
+    <div
+      className="bg-gray-800 rounded-lg shadow-md px-4 py-2 mb-2 cursor-pointer focus:scale-95 focus:ring-3 focus:ring-blue-400 hover:scale-105 transition-transform transition-ring transition-duration-100"
+      onClick={onClickHandle}
+      tabIndex={0}
+    >
+      <p className="font-semibold">{title}:</p>
+      <p>{count}</p>
+    </div>
+  );
 
   return (
     <div className="justify-center p-8">
@@ -91,38 +86,14 @@ const Home = ({
       <div className="flex justify-center mt-2">
         <div className="grid grid-cols-2 gap-4">
           <Card>
-            <StatCard
-              title="Total Books"
-              onClickHandle={showBooks}
-              count={counts.books}
-            />
-            <StatCard
-              title="Total Authors"
-              onClickHandle={showAuthors}
-              count={counts.authors}
-            />
-            <StatCard
-              title="Total Borrowers"
-              onClickHandle={showBorrowers}
-              count={counts.borrowers}
-            />
+            <StatCard title="Total Books" onClickHandle={showBooks} count={counts.books} />
+            <StatCard title="Total Authors" onClickHandle={showAuthors} count={counts.authors} />
+            <StatCard title="Total Borrowers" onClickHandle={showBorrowers} count={counts.borrowers} />
           </Card>
           <Card>
-            <StatCard
-              title="Checked Out Books"
-              onClickHandle={showCheckoutBooks}
-              count={counts.booksWithBorrower}
-            />
-            <StatCard
-              title="Borrowers without Books"
-              onClickHandle={showBorrowersWithoutBook}
-              count={counts.borrowersWithoutBook}
-            />
-            <StatCard
-              title="Remaining Books"
-              onClickHandle={showRemainingBooks}
-              count={Math.max(0, counts.books - counts.booksWithBorrower)}
-            />
+            <StatCard title="Checked Out Books" onClickHandle={showCheckoutBooks} count={counts.booksWithBorrower} />
+            <StatCard title="Borrowers without Books" onClickHandle={showBorrowersWithoutBook} count={counts.borrowersWithoutBook} />
+            <StatCard title="Remaining Books" onClickHandle={showRemainingBooks} count={Math.max(0, counts.books - counts.booksWithBorrower)} />
           </Card>
         </div>
       </div>
