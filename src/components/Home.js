@@ -22,12 +22,11 @@ const Home = ({
   useEffect(() => {
     const fetchCounts = async () => {
       try {
-        // Use Vite environment variable
         const apiUrl = API_URL;
-if (!apiUrl) {
-  console.error("REACT_APP_API_URL is undefined. Check your .env file.");
-  return;
-}
+        if (!apiUrl) {
+          console.error("REACT_APP_API_URL is undefined. Check your .env file.");
+          return;
+        }
 
 const response = await fetch(`${apiUrl}/api/counts`);
 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -39,8 +38,8 @@ setCounts({
   borrowers: parseInt(data.borrowers) || 0,
   booksWithBorrower: parseInt(data.booksWithBorrower) || 0,
   borrowersWithoutBook: parseInt(data.borrowersWithoutBook) || 0,
-});
-  } catch (error) {
+});} 
+  catch (error) {
         console.error("Error fetching counts:", error);
       }
     };
